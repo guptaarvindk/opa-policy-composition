@@ -1,5 +1,6 @@
 package main
 
+default name := "common"
 applicable_policy := {
     "vm": "compute",
     "lambda": "compute",
@@ -15,10 +16,10 @@ name := applicable_policy[input.resource]
 
 router[policy] = data.policies[name][policy].deny
 
-deny[msg] {
-    not name
-    msg := sprintf("no applicable policy found for input.resource %v", [input.resource])
-}
+#deny[msg] {
+#    not name
+#    msg := sprintf("no applicable policy found for input.resource %v", [input.resource])
+#}
 
 deny[msg] {
     policy := router[_]
